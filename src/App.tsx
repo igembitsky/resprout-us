@@ -1,23 +1,39 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { app, analytics } from './config/firebase';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/layout/Layout';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import FormInput from './pages/FormInput';
 
 function App() {
-  useEffect(() => {
-    console.log('Firebase initialized: ', !!app);
-    console.log('Analytics initialized: ', !!analytics);
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <Login />
+            </Layout>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <Layout>
+              <Dashboard />
+            </Layout>
+          }
+        />
+        <Route
+          path="/form"
+          element={
+            <Layout>
+              <FormInput />
+            </Layout>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
